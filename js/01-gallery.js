@@ -2,13 +2,13 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const galleryList = document.querySelector('.gallery');
 
-const markup = galleryItems.map(item => `<li class="gallery__item">
-  <a class="gallery__link" href="${item.original}">
+const markup = galleryItems.map(({ preview, original, description }) => `<li class="gallery__item">
+  <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
-      src="${item.preview}"
-      data-source="${item.original}"
-      alt="${item.description}"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
   </a>
 </li>`).join('');
@@ -22,6 +22,6 @@ function onClick(evt) {
     }
 
     evt.preventDefault();
-    const instance = basicLightbox.create(`<img src="${evt.target.dataset.source}" alt="${evt.target.alt}" />`);
-    instance.show();
+    const modal = basicLightbox.create(`<div class="modal"><img src="${evt.target.dataset.source}" alt="${evt.target.alt}" /></div>`);
+    modal.show();
 }
